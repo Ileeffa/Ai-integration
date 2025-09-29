@@ -1,35 +1,40 @@
-<!-- frontend/index.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Skincare Routine Generator</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <h1>AI Skincare Routine Generator</h1>
-    <form id="skincare-form">
-  <input
-    type="text"
-    id="user-instructions"
-    placeholder="Describe your skin type or routine needs"
-    required
-    autocomplete="off"
-  />
-  <input type="submit" class="submit-button" value="Generate Routine" />
-</form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Skincare Routine Generator</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🧴 AI Skincare Routine Generator</h1>
+      </header>
 
-<div class="hidden" id="result"></div>
+      <main>
+        <form id="skincare-form">
+          <input
+            type="text"
+            id="user-instructions"
+            placeholder="Describe your skin (e.g. dry skin, night routine)"
+            required
+            autocomplete="off"
+          />
+          <input type="submit" value="Generate Routine" class="submit-button" />
+        </form>
 
-    <div id="result"></div>
-  </div>
-  <footer>
-    Open-sourced on
-    <a href="YOUR_GITHUB_LINK_HERE" target="_blank">GitHub</a>
-    and hosted on <a href="https://netlify.com" target="_blank">Netlify</a>.
-  </footer>
-  <script src="index.js"></script>
-</body>
+        <div id="result"></div>
+      </main>
+
+      <footer>
+        Project by <a href="https://yourgithub.com" target="_blank">You</a> |
+        <a href="https://github.com/your-repo" target="_blank">Open-source on GitHub</a>
+      </footer>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
 </html>
