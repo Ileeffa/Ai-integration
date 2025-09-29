@@ -7,7 +7,7 @@ document.getElementById("skincare-form").addEventListener("submit", async functi
   const resultDiv = document.getElementById("result");
   resultDiv.innerHTML = "Generating your skincare routine...";
 
-  const apiKey = "YOUR_SHECODES_API_KEY"; // 🔐 Replace this with your actual key
+  const apiKey = "YOUR_SHECODES_API_KEY"; // 
   const context = "You are a skincare expert. Based on the prompt, generate a full skincare routine with products and steps.";
 
   try {
