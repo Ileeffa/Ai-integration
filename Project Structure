@@ -1,0 +1,8 @@
+ai-skincare-generator/
+├── backend/
+│   └── server.js         ← Node.js Express backend (calls OpenAI securely)
+├── frontend/
+│   ├── index.html        ← User interface
+│   ├── style.css         ← Basic styling
+│   └── index.js          ← JS logic (calls your backend)
+├── README.md             ← Project info for GitHub
