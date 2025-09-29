@@ -11,14 +11,18 @@
   <div class="container">
     <h1>AI Skincare Routine Generator</h1>
     <form id="skincare-form">
-      <input
-        type="text"
-        id="user-input"
-        placeholder="Describe your skin type or goals (e.g., dry skin with dark spots)"
-        required
-      />
-      <button type="submit">Generate Routine</button>
-    </form>
+  <input
+    type="text"
+    id="user-instructions"
+    placeholder="Describe your skin type or routine needs"
+    required
+    autocomplete="off"
+  />
+  <input type="submit" class="submit-button" value="Generate Routine" />
+</form>
+
+<div class="hidden" id="result"></div>
+
     <div id="result"></div>
   </div>
   <footer>
