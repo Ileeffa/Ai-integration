@@ -1,30 +1,31 @@
-document.getElementById("skincare-form").addEventListener("submit", async function (e) {
-  e.preventDefault();
+function displayRoutine(response) {
+  new Typewriter("#result", {
+    strings: response.data.answer,
+    autoStart: true,
+    delay: 1,
+    cursor: "",
+  });
+}
 
-  const input = document.getElementById("user-input").value.trim();
-  const resultDiv = document.getElementById("result");
+function generateRoutine(event) {
+  event.preventDefault();
 
-  resultDiv.innerHTML = "✨ Generating your skincare routine...";
+  let instructionsInput = document.querySelector("#user-instructions");
+  let apiKey = "2046c535afeb092fo82f1d306d8a2b2t";
+  let context =
+    "You are a professional skincare expert. Based on the prompt, generate a full skincare routine with product types, step-by-step instructions, and friendly explanations. Keep the advice easy to follow and beginner-friendly.";
+  let prompt = `Skincare request: ${instructionsInput.value}`;
+  let apiURL = `https://api.shecodes.io/ai/v1/generate?prompt=${encodeURIComponent(prompt)}&context=${encodeURIComponent(context)}&key=${apiKey}`;
 
-  const apiKey = "9005af4bd71750f1o487b22bt9e35823"; // ✅ Your real API key
-  const context = "You are a professional skincare expert. Based on the user's prompt, generate a complete, clear, step-by-step skincare routine.";
+  let resultElement = document.querySelector("#result");
+  resultElement.classList.remove("hidden");
+  resultElement.innerHTML = `<div class="generating">🧴 Creating a personalized skincare routine for: <strong>${instructionsInput.value}</strong></div>`;
 
-  try {
-    const url = `https://api.shecodes.io/ai/v1/generate?prompt=${encodeURIComponent(input)}&context=${encodeURIComponent(context)}&key=${apiKey}`;
-
-    const response = await fetch(url);
-    const data = await response.json();
-
-    // 🔍 Log the full response to help debug
-    console.log("✅ API Response:", data);
-
-    if (data.answer) {
-      resultDiv.innerHTML = `<pre>${data.answer}</pre>`;
-    } else {
-      resultDiv.innerHTML = "🧴 Sorry, no skincare advice was returned. Try a different or more specific prompt.";
-    }
-  } catch (error) {
-    resultDiv.innerHTML = "❌ Something went wrong. Please try again.";
+  axios.get(apiURL).then(displayRoutine).catch(function (error) {
+    resultElement.innerHTML = "❌ Something went wrong. Please check your input or try again later.";
     console.error("API Error:", error);
-  }
-});
+  });
+}
+
+let formElement = document.querySelector("#skincare-form");
+formElement.addEventListener("submit", generateRoutine);
