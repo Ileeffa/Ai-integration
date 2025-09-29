@@ -1,23 +1,28 @@
-// frontend/index.js
+// frontend/index.js – using SheCodes AI API
+
 document.getElementById("skincare-form").addEventListener("submit", async function (e) {
   e.preventDefault();
-  const input = document.getElementById("user-input").value;
+
+  const input = document.getElementById("user-input").value.trim();
   const resultDiv = document.getElementById("result");
   resultDiv.innerHTML = "Generating your skincare routine...";
 
-  try {
-    const response = await fetch("http://localhost:5000/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ prompt: input }),
-    });
+  const apiKey = "YOUR_SHECODES_API_KEY"; // 🔐 Replace this with your actual key
+  const context = "You are a skincare expert. Based on the prompt, generate a full skincare routine with products and steps.";
 
+  try {
+    const url = `https://api.shecodes.io/ai/v1/generate?prompt=${encodeURIComponent(input)}&context=${encodeURIComponent(context)}&key=${apiKey}`;
+
+    const response = await fetch(url);
     const data = await response.json();
-    resultDiv.innerHTML = `<pre>${data.routine}</pre>`;
+
+    if (data.answer) {
+      resultDiv.innerHTML = `<pre>${data.answer}</pre>`;
+    } else {
+      resultDiv.innerHTML = "Sorry, no skincare advice returned.";
+    }
   } catch (error) {
     resultDiv.innerHTML = "Something went wrong. Please try again.";
-    console.error(error);
+    console.error("API Error:", error);
   }
 });
